@@ -18,7 +18,8 @@ def datacleaning(df):
     # Reduce the size of the dataset
     df = df[(df.year.isin([2016,2017,2018]))& 
                         df.loan_status.isin(['Fully Paid','Charged Off','Late'])]
-    
+    target_value = {'Fully Paid':2,'Charged Off':1, 'Late':0}
+    df.loan_status = df.loan_status.replace(target_value)
     df_new = df[[
         'initial_list_status','open_acc','total_acc','inq_last_6mths','collections_12_mths_ex_med','tot_coll_amt',
         'revol_bal','pub_rec','pub_rec_bankruptcies','acc_now_delinq','all_util','revol_util','delinq_2yrs',
