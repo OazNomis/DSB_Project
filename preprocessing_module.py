@@ -11,10 +11,6 @@ def datacleaning(df):
     '''
     # Parse Years
     df['year'] = pd.to_datetime(df.issue_d).dt.year
-    # Bin late loans into one group
-    df.loan_status = df.loan_status.apply(lambda x: np.where(x == 'Late (31-120 days)','Late',x))
-    df.loan_status = df.loan_status.apply(lambda x: np.where(x == 'In Grace Period','Late',x))
-    df.loan_status = df.loan_status.apply(lambda x: np.where(x == 'Late (16-30 days)','Late',x))
     # Reduce the size of the dataset
     df = df[(df.year.isin([2016,2017,2018]))& 
                         df.loan_status.isin(['Fully Paid','Charged Off'])]
